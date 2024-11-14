@@ -1,0 +1,7 @@
+Current device is cuda
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/GAN/main.py", line 165, in <module>
+    main()
+  File "/root/default/Generative-Model/GAN/main.py", line 75, in main
+    set_random_seed(config["seed"])
+KeyError: 'seed'

@@ -1,0 +1,11 @@
+Current device is cuda
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/GAN/main.py", line 166, in <module>
+    main()
+  File "/root/default/Generative-Model/GAN/main.py", line 88, in main
+    generator = gan_module.Generator(config)
+  File "/root/default/Generative-Model/GAN/model/model.py", line 35, in __init__
+    self.linear1 = nn.Linear(self.noise_size, self.hidden_size1)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1269, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'Generator' object has no attribute 'noise_size'

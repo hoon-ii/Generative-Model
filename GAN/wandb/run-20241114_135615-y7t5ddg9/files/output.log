@@ -1,0 +1,11 @@
+Current device is cuda
+Number of DISC Parameters: 686.081k
+Number of GEN Parameters: 711.452k
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/GAN/main.py", line 166, in <module>
+    main()
+  File "/root/default/Generative-Model/GAN/main.py", line 109, in main
+    GAN_train_module.train(
+  File "/root/default/Generative-Model/GAN/modules/train.py", line 28, in train
+    num_epoch = config["epochs"]
+KeyError: 'epochs'

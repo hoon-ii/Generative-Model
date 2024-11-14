@@ -1,0 +1,20 @@
+Current device is cuda
+Number of DISC Parameters: 1460.225k
+Number of GEN Parameters: 1486.352k
+(GAN) training...: 0it [00:05, ?it/s]
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/GAN/main.py", line 165, in <module>
+    main()
+  File "/root/default/Generative-Model/GAN/main.py", line 108, in main
+    GAN_train_module.train(
+  File "/root/default/Generative-Model/GAN/modules/train.py", line 70, in train
+    real_loss = gan_loss(discriminator(real_images), real_label)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/root/default/Generative-Model/GAN/model/model.py", line 20, in forward
+    x = self.leaky_relu(self.linear1(x))
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (128x614656 and 784x1024)

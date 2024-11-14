@@ -1,0 +1,16 @@
+{"time":"2024-11-14T14:15:20.641117266Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-14T14:15:20.641166254Z","level":"INFO","msg":"created symlink","path":"/root/default/Generative-Model/GAN/wandb/run-20241114_141520-adwg6tow/logs/debug-core.log"}
+{"time":"2024-11-14T14:15:20.767069495Z","level":"INFO","msg":"created new stream","id":"adwg6tow"}
+{"time":"2024-11-14T14:15:20.767148449Z","level":"INFO","msg":"stream: started","id":"adwg6tow"}
+{"time":"2024-11-14T14:15:20.767230608Z","level":"INFO","msg":"sender: started","stream_id":"adwg6tow"}
+{"time":"2024-11-14T14:15:20.767230704Z","level":"INFO","msg":"writer: Do: started","stream_id":"adwg6tow"}
+{"time":"2024-11-14T14:15:20.767340983Z","level":"INFO","msg":"handler: started","stream_id":"adwg6tow"}
+{"time":"2024-11-14T14:15:21.240977851Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-14T14:15:36.225352457Z","level":"INFO","msg":"stream: closing","id":"adwg6tow"}
+{"time":"2024-11-14T14:15:36.22565591Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-14T14:15:36.227144633Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-14T14:15:37.346413934Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-14T14:15:37.619693818Z","level":"INFO","msg":"handler: closed","stream_id":"adwg6tow"}
+{"time":"2024-11-14T14:15:37.619771284Z","level":"INFO","msg":"writer: Close: closed","stream_id":"adwg6tow"}
+{"time":"2024-11-14T14:15:37.61979781Z","level":"INFO","msg":"sender: closed","stream_id":"adwg6tow"}
+{"time":"2024-11-14T14:15:37.622281849Z","level":"INFO","msg":"stream: closed","id":"adwg6tow"}

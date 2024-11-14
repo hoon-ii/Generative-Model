@@ -1,0 +1,3 @@
+usage: parameters [-h] [--seed SEED] [--dataset DATASET] [--epochs EPOCHS] [--batch_size BATCH_SIZE] [--lr LR] [--img_size IMG_SIZE] [--channels CHANNELS] [--noise_size NOISE_SIZE] [--hidden_size1 HIDDEN_SIZE1] [--hidden_size2 HIDDEN_SIZE2]
+                  [--hidden_size3 HIDDEN_SIZE3] --model_version MODEL_VERSION
+parameters: error: the following arguments are required: --model_version

@@ -1,0 +1,159 @@
+Current device is cuda
+Number of DISC Parameters: 1460.225k
+Number of GEN Parameters: 1486.352k
+(GAN) training...: 468it [00:12, 36.27it/s]
+Epoch [1/1000], Step [150/468], d_loss: 0.04204, g_loss: 3.04420
+Epoch [1/1000], Step [300/468], d_loss: 0.21753, g_loss: 2.69309
+Epoch [1/1000], Step [450/468], d_loss: 0.47560, g_loss: 0.99290
+Epoch [1] Discriminator performance: 0.88, Generator performance: 0.10
+(GAN) training...: 468it [00:11, 40.47it/s]
+Epoch [2/1000], Step [150/468], d_loss: 0.00235, g_loss: 5.81991
+Epoch [2/1000], Step [300/468], d_loss: 0.00283, g_loss: 5.26100
+Epoch [2/1000], Step [450/468], d_loss: 0.01183, g_loss: 4.97376
+Epoch [2] Discriminator performance: 0.98, Generator performance: 0.01
+(GAN) training...: 468it [00:12, 36.75it/s]
+Epoch [3/1000], Step [150/468], d_loss: 0.00571, g_loss: 5.04474
+Epoch [3/1000], Step [300/468], d_loss: 0.00094, g_loss: 8.49438
+Epoch [3/1000], Step [450/468], d_loss: 0.00180, g_loss: 8.83799
+Epoch [3] Discriminator performance: 0.99, Generator performance: 0.00
+(GAN) training...: 468it [00:12, 37.60it/s]
+Epoch [4/1000], Step [150/468], d_loss: 0.00437, g_loss: 7.53786
+Epoch [4/1000], Step [300/468], d_loss: 0.00966, g_loss: 9.72814
+Epoch [4/1000], Step [450/468], d_loss: 0.00604, g_loss: 6.92970
+Epoch [4] Discriminator performance: 0.99, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 41.66it/s]
+Epoch [5/1000], Step [150/468], d_loss: 0.00153, g_loss: 7.49989
+Epoch [5/1000], Step [300/468], d_loss: 0.00076, g_loss: 9.45122
+Epoch [5/1000], Step [450/468], d_loss: 0.00039, g_loss: 8.03061
+Epoch [5] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.78it/s]
+Epoch [6/1000], Step [150/468], d_loss: 0.00016, g_loss: 8.93797
+Epoch [6/1000], Step [300/468], d_loss: 0.00094, g_loss: 10.01569
+Epoch [6/1000], Step [450/468], d_loss: 0.00005, g_loss: 9.17702
+Epoch [6] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.79it/s]
+Epoch [7/1000], Step [150/468], d_loss: 0.00019, g_loss: 7.93332
+Epoch [7/1000], Step [300/468], d_loss: 0.00003, g_loss: 9.75046
+Epoch [7/1000], Step [450/468], d_loss: 0.00003, g_loss: 11.40224
+Epoch [7] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:12, 37.66it/s]
+Epoch [8/1000], Step [150/468], d_loss: 0.00001, g_loss: 11.27139
+Epoch [8/1000], Step [300/468], d_loss: 0.00001, g_loss: 11.50983
+Epoch [8/1000], Step [450/468], d_loss: 0.00036, g_loss: 17.45098
+Epoch [8] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 42.67it/s]
+Epoch [9/1000], Step [150/468], d_loss: 0.00001, g_loss: 10.77764
+Epoch [9/1000], Step [300/468], d_loss: 0.00001, g_loss: 12.46741
+Epoch [9/1000], Step [450/468], d_loss: 0.00004, g_loss: 10.29785
+Epoch [9] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:12, 36.17it/s]
+Epoch [10/1000], Step [150/468], d_loss: 0.00001, g_loss: 10.96776
+Epoch [10/1000], Step [300/468], d_loss: 0.00003, g_loss: 9.75541
+Epoch [10/1000], Step [450/468], d_loss: 0.00000, g_loss: 53.14498
+Epoch [10] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 44.04it/s]
+Epoch [11/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.38195
+Epoch [11/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.23220
+Epoch [11/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.28948
+Epoch [11] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 44.08it/s]
+Epoch [12/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.31573
+Epoch [12/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.40144
+Epoch [12/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.26859
+Epoch [12] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.99it/s]
+Epoch [13/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.45542
+Epoch [13/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.53384
+Epoch [13/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.46571
+Epoch [13] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 42.82it/s]
+Epoch [14/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.21386
+Epoch [14/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.29606
+Epoch [14/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.33384
+Epoch [14] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 40.92it/s]
+Epoch [15/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.49718
+Epoch [15/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.20937
+Epoch [15/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.34924
+Epoch [15] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 40.52it/s]
+Epoch [16/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.23477
+Epoch [16/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.39916
+Epoch [16/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.34450
+Epoch [16] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.57it/s]
+Epoch [17/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.20585
+Epoch [17/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.36847
+Epoch [17/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.44227
+Epoch [17] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:12, 36.59it/s]
+Epoch [18/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.79232
+Epoch [18/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.03374
+Epoch [18/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.44672
+Epoch [18] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 41.40it/s]
+Epoch [19/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.02042
+Epoch [19/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.25557
+Epoch [19/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.39959
+Epoch [19] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 44.35it/s]
+Epoch [20/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.32243
+Epoch [20/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.48342
+Epoch [20/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.18840
+Epoch [20] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 41.34it/s]
+Epoch [21/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.03583
+Epoch [21/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.11673
+Epoch [21/1000], Step [450/468], d_loss: 0.00000, g_loss: 55.11744
+Epoch [21] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.83it/s]
+Epoch [22/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.18192
+Epoch [22/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.04411
+Epoch [22/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.83627
+Epoch [22] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 41.87it/s]
+Epoch [23/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.94799
+Epoch [23/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.84389
+Epoch [23/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.84173
+Epoch [23] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 44.20it/s]
+Epoch [24/1000], Step [150/468], d_loss: 0.00000, g_loss: 55.28320
+Epoch [24/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.00083
+Epoch [24/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.88797
+Epoch [24] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 39.84it/s]
+Epoch [25/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.97974
+Epoch [25/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.82848
+Epoch [25/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.91985
+Epoch [25] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 41.54it/s]
+Epoch [26/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.83184
+Epoch [26/1000], Step [300/468], d_loss: 0.00000, g_loss: 55.08397
+Epoch [26/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.98007
+Epoch [26] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.93it/s]
+Epoch [27/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.47867
+Epoch [27/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.65833
+Epoch [27/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.62598
+Epoch [27] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 41.66it/s]
+Epoch [28/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.57515
+Epoch [28/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.56438
+Epoch [28/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.81248
+Epoch [28] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:11, 42.32it/s]
+Epoch [29/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.36325
+Epoch [29/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.59672
+Epoch [29/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.42303
+Epoch [29] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:10, 43.59it/s]
+Epoch [30/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.54257
+Epoch [30/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.68867
+Epoch [30/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.48636
+Epoch [30] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 468it [00:12, 37.56it/s]
+Epoch [31/1000], Step [150/468], d_loss: 0.00000, g_loss: 54.33558
+Epoch [31/1000], Step [300/468], d_loss: 0.00000, g_loss: 54.09460
+Epoch [31/1000], Step [450/468], d_loss: 0.00000, g_loss: 54.18398
+Epoch [31] Discriminator performance: 1.00, Generator performance: 0.00
+(GAN) training...: 38it [00:01, 32.71it/s]

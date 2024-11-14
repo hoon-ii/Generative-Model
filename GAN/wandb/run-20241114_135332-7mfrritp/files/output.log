@@ -1,0 +1,19 @@
+Current device is cuda
+Number of VQVAE Parameters: 686.081k
+Number of UNET Parameters: 711.452k
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/GAN/main.py", line 166, in <module>
+    main()
+  File "/root/default/Generative-Model/GAN/main.py", line 99, in main
+    wandb.log(f"Number of VQVAE Parameters: {discriminator_num_params/1_000}k")
+  File "/opt/conda/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 451, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 403, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 393, in wrapper
+    return func(self, *args, **kwargs)
+  File "/opt/conda/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1922, in log
+    self._log(data=data, step=step, commit=commit)
+  File "/opt/conda/lib/python3.10/site-packages/wandb/sdk/wandb_run.py", line 1636, in _log
+    raise ValueError("wandb.log must be passed a dictionary")
+ValueError: wandb.log must be passed a dictionary
