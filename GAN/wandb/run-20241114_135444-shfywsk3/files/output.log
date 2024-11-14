@@ -1,9 +1,0 @@
-Current device is cuda
-Number of DISC Parameters: 686.081k
-Number of GEN Parameters: 711.452k
-Traceback (most recent call last):
-  File "/root/default/Generative-Model/GAN/main.py", line 166, in <module>
-    main()
-  File "/root/default/Generative-Model/GAN/main.py", line 109, in main
-    GAN_train_module.train_function(
-AttributeError: module 'modules.train' has no attribute 'train_function'
