@@ -20,8 +20,8 @@ except:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-project = "convVAE" # put your WANDB project name
-# entity = "wotjd1410" # put your WANDB username
+project = 'VAE'
+# entity = "hwawon" # put your WANDB username
 
 run = wandb.init(
     project=project, 
@@ -47,11 +47,11 @@ def get_args(debug):
     
     parser.add_argument('--dataset', type=str, default='MNIST', 
                         help="""
-                        Dataset options: MNIST, CelebA
+                        Dataset options: MNIST, CIFAR10
                         """)
-    parser.add_argument('--hidden_dim', type=list, default=[32, 64, 128], 
-                        help='Number of input channels.')
-    parser.add_argument('--latent_dim', type=int, default=128, 
+    parser.add_argument('--hidden_dims', type=list, default=[256, 128, 64], 
+                        help="Number of neurons")
+    parser.add_argument('--latent_dim', type=int, default=20, 
                         help='Dimension of latent space.')
 
     # Data parameters
@@ -88,7 +88,12 @@ def main():
     """dataset"""
     dataset_module = importlib.import_module('datasets.preprocess')
     importlib.reload(dataset_module)
-    train_dataset = dataset_module.CustomMNIST(train=True)
+
+    if config['dataset'] == 'MNIST':
+        train_dataset = dataset_module.CustomMNIST(train=True)
+    elif config['dataset'] == 'CIFAR10':
+        train_dataset = dataset_module.CustomCIFAR10(train = True)
+
     train_dataloader = DataLoader(
         train_dataset, 
         batch_size=config["batch_size"]
@@ -97,7 +102,8 @@ def main():
     """model"""
     model_module = importlib.import_module('modules.model')
     importlib.reload(model_module)
-    model = model_module.convVAE(config, train_dataset.EncodedInfo).to(device)
+
+    model = model_module.VAE(config, train_dataset.EncodedInfo).to(device)
     #%%
     optimizer = optim.Adam(model.parameters(), lr=config["lr"])
     #%%
@@ -122,7 +128,7 @@ def main():
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    model_name = f"convVAE_{base_name}_{config['seed']}"
+    model_name = f"VAE_{base_name}_{config['seed']}"
 
     torch.save(model.state_dict(), f"./{model_dir}/{model_name}.pth")
     artifact = wandb.Artifact(
