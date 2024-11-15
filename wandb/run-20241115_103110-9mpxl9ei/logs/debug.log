@@ -1,0 +1,26 @@
+2024-11-15 10:31:10,154 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-11-15 10:31:10,154 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Configure stats pid to 50776
+2024-11-15 10:31:10,154 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Loading settings from /root/.config/wandb/settings
+2024-11-15 10:31:10,156 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Loading settings from /root/default/Generative-Model/VAE/wandb/settings
+2024-11-15 10:31:10,158 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2024-11-15 10:31:10,158 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-11-15 10:31:10,158 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'VAE/inference.py', 'program_abspath': '/root/default/Generative-Model/VAE/inference.py', 'program': '/root/default/Generative-Model/VAE/inference.py'}
+2024-11-15 10:31:10,158 INFO    MainThread:50776 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-11-15 10:31:10,159 INFO    MainThread:50776 [wandb_init.py:_log_setup():533] Logging user logs to /root/default/Generative-Model/VAE/wandb/run-20241115_103110-9mpxl9ei/logs/debug.log
+2024-11-15 10:31:10,160 INFO    MainThread:50776 [wandb_init.py:_log_setup():534] Logging internal logs to /root/default/Generative-Model/VAE/wandb/run-20241115_103110-9mpxl9ei/logs/debug-internal.log
+2024-11-15 10:31:10,161 INFO    MainThread:50776 [wandb_init.py:init():619] calling init triggers
+2024-11-15 10:31:10,163 INFO    MainThread:50776 [wandb_init.py:init():626] wandb.init called with sweep_config: {}
+config: {}
+2024-11-15 10:31:10,163 INFO    MainThread:50776 [wandb_init.py:init():669] starting backend
+2024-11-15 10:31:10,164 INFO    MainThread:50776 [wandb_init.py:init():673] sending inform_init request
+2024-11-15 10:31:10,167 INFO    MainThread:50776 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-11-15 10:31:10,168 INFO    MainThread:50776 [wandb_init.py:init():686] backend started and connected
+2024-11-15 10:31:10,174 INFO    MainThread:50776 [wandb_init.py:init():781] updated telemetry
+2024-11-15 10:31:10,198 INFO    MainThread:50776 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-11-15 10:31:10,626 INFO    MainThread:50776 [wandb_init.py:init():867] starting run threads in backend
+2024-11-15 10:31:10,739 INFO    MainThread:50776 [wandb_run.py:_console_start():2456] atexit reg
+2024-11-15 10:31:10,740 INFO    MainThread:50776 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-11-15 10:31:10,740 INFO    MainThread:50776 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-11-15 10:31:10,740 INFO    MainThread:50776 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-11-15 10:31:10,742 INFO    MainThread:50776 [wandb_init.py:init():911] run started, returning control to user process
+2024-11-15 10:31:11,445 WARNING MsgRouterThr:50776 [router.py:message_loop():75] message_loop has been closed

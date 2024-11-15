@@ -1,0 +1,13 @@
+Current device is cuda
+Number of Parameters: 0.5M
+inner loop...:   0%|                                                                                                                                                                                     | 0/938 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/VAE/main.py", line 148, in <module>
+    main()
+  File "/root/default/Generative-Model/VAE/main.py", line 118, in main
+    train_module.train_function(
+  File "/root/default/Generative-Model/VAE/modules/train.py", line 29, in train_function
+    bce_loss = F.binary_cross_entropy(recon, batch.view(-1, 784), reduction = 'sum')
+  File "/opt/conda/lib/python3.10/site-packages/torch/nn/functional.py", line 3086, in binary_cross_entropy
+    raise ValueError(
+ValueError: Using a target size (torch.Size([64, 784])) that is different to the input size (torch.Size([64, 1, 28, 28])) is deprecated. Please ensure they have the same size.

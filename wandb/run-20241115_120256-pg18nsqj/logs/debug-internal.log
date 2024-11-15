@@ -1,0 +1,20 @@
+{"time":"2024-11-15T12:02:56.266911764Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-15T12:02:56.266961615Z","level":"INFO","msg":"created symlink","path":"/root/default/Generative-Model/VAE/wandb/run-20241115_120256-pg18nsqj/logs/debug-core.log"}
+{"time":"2024-11-15T12:02:56.394269433Z","level":"INFO","msg":"created new stream","id":"pg18nsqj"}
+{"time":"2024-11-15T12:02:56.394393936Z","level":"INFO","msg":"stream: started","id":"pg18nsqj"}
+{"time":"2024-11-15T12:02:56.394540784Z","level":"INFO","msg":"writer: Do: started","stream_id":"pg18nsqj"}
+{"time":"2024-11-15T12:02:56.394622367Z","level":"INFO","msg":"sender: started","stream_id":"pg18nsqj"}
+{"time":"2024-11-15T12:02:56.39477886Z","level":"INFO","msg":"handler: started","stream_id":"pg18nsqj"}
+{"time":"2024-11-15T12:02:57.132032104Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-15T12:07:20.778062001Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-15T12:07:20.779658882Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-15T12:07:21.778983922Z","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact VAE_MNIST_64","runtime_seconds":1.010908598,"subtasks":[{"desc":"model.py","runtime_seconds":0.157614648,"progress":"2.8KB/2.8KB"},{"desc":"train.py","runtime_seconds":0.157593589,"progress":"1.5KB/1.5KB"},{"desc":"VAE_MNIST_64_0.pth","runtime_seconds":0.157478245,"progress":"1.0MB/4.4MB"},{"desc":"main.py","runtime_seconds":0.157444271,"progress":"4.7KB/4.7KB"}]}],"total_operations":1}}
+{"time":"2024-11-15T12:07:24.770873385Z","level":"WARN","msg":"No job ingredients found, not creating job artifact"}
+{"time":"2024-11-15T12:07:24.770929655Z","level":"WARN","msg":"No source type found, not creating job artifact"}
+{"time":"2024-11-15T12:07:24.770937363Z","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2024-11-15T12:07:24.82155748Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-15T12:07:26.09848891Z","level":"INFO","msg":"stream: closing","id":"pg18nsqj"}
+{"time":"2024-11-15T12:07:26.098552424Z","level":"INFO","msg":"handler: closed","stream_id":"pg18nsqj"}
+{"time":"2024-11-15T12:07:26.098575941Z","level":"INFO","msg":"writer: Close: closed","stream_id":"pg18nsqj"}
+{"time":"2024-11-15T12:07:26.09871834Z","level":"INFO","msg":"sender: closed","stream_id":"pg18nsqj"}
+{"time":"2024-11-15T12:07:26.100846008Z","level":"INFO","msg":"stream: closed","id":"pg18nsqj"}

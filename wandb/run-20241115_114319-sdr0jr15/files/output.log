@@ -1,0 +1,11 @@
+Current device is cuda
+Number of Parameters: 0.5M
+inner loop...:   0%|                                                                                                                                                                                     | 0/938 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/root/default/Generative-Model/VAE/main.py", line 148, in <module>
+    main()
+  File "/root/default/Generative-Model/VAE/main.py", line 118, in main
+    train_module.train_function(
+  File "/root/default/Generative-Model/VAE/modules/train.py", line 29, in train_function
+    bce_loss = F.binary_cross_entropy_loss(recon, batch.view(-1, 784), reduction = 'sum')
+AttributeError: module 'torch.nn.functional' has no attribute 'binary_cross_entropy_loss'

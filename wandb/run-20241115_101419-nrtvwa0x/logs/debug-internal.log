@@ -1,0 +1,17 @@
+{"time":"2024-11-15T10:14:19.435837895Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-15T10:14:19.435888831Z","level":"INFO","msg":"created symlink","path":"/root/default/Generative-Model/VAE/wandb/run-20241115_101419-nrtvwa0x/logs/debug-core.log"}
+{"time":"2024-11-15T10:14:19.561090562Z","level":"INFO","msg":"created new stream","id":"nrtvwa0x"}
+{"time":"2024-11-15T10:14:19.561183153Z","level":"INFO","msg":"stream: started","id":"nrtvwa0x"}
+{"time":"2024-11-15T10:14:19.561313619Z","level":"INFO","msg":"writer: Do: started","stream_id":"nrtvwa0x"}
+{"time":"2024-11-15T10:14:19.561402089Z","level":"INFO","msg":"handler: started","stream_id":"nrtvwa0x"}
+{"time":"2024-11-15T10:14:19.56152155Z","level":"INFO","msg":"sender: started","stream_id":"nrtvwa0x"}
+{"time":"2024-11-15T10:14:19.936356327Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-15T10:29:10.045566782Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-15T10:29:10.047682019Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-15T10:29:11.046648859Z","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact VAE_MNIST_20","runtime_seconds":1.015288196,"subtasks":[{"desc":"VAE_MNIST_20_0.pth","runtime_seconds":0.258431145,"progress":"1.1MB/1.9MB"}]}],"total_operations":1}}
+{"time":"2024-11-15T10:29:15.40300303Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-15T10:29:16.68816932Z","level":"INFO","msg":"stream: closing","id":"nrtvwa0x"}
+{"time":"2024-11-15T10:29:16.68825347Z","level":"INFO","msg":"handler: closed","stream_id":"nrtvwa0x"}
+{"time":"2024-11-15T10:29:16.688286606Z","level":"INFO","msg":"writer: Close: closed","stream_id":"nrtvwa0x"}
+{"time":"2024-11-15T10:29:16.688364377Z","level":"INFO","msg":"sender: closed","stream_id":"nrtvwa0x"}
+{"time":"2024-11-15T10:29:16.690579075Z","level":"INFO","msg":"stream: closed","id":"nrtvwa0x"}

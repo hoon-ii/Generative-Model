@@ -1,0 +1,20 @@
+{"time":"2024-11-15T11:44:45.919405856Z","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-15T11:44:45.919458108Z","level":"INFO","msg":"created symlink","path":"/root/default/Generative-Model/VAE/wandb/run-20241115_114445-5k69390k/logs/debug-core.log"}
+{"time":"2024-11-15T11:44:46.044835114Z","level":"INFO","msg":"created new stream","id":"5k69390k"}
+{"time":"2024-11-15T11:44:46.044907171Z","level":"INFO","msg":"stream: started","id":"5k69390k"}
+{"time":"2024-11-15T11:44:46.04496214Z","level":"INFO","msg":"writer: Do: started","stream_id":"5k69390k"}
+{"time":"2024-11-15T11:44:46.045048504Z","level":"INFO","msg":"handler: started","stream_id":"5k69390k"}
+{"time":"2024-11-15T11:44:46.045163773Z","level":"INFO","msg":"sender: started","stream_id":"5k69390k"}
+{"time":"2024-11-15T11:44:46.712603653Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-15T11:59:07.016642073Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-15T11:59:07.018533018Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-15T11:59:07.98779662Z","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact VAE_MNIST_20","runtime_seconds":1.01204847,"subtasks":[{"desc":"train.py","runtime_seconds":0.075395727,"progress":"1.5KB/1.5KB"},{"desc":"VAE_MNIST_20_0.pth","runtime_seconds":0.075367212,"progress":"1.0MB/1.9MB"}]},{"desc":"uploading output.log","runtime_seconds":0.283527589,"progress":"62.0KB/62.0KB"}],"total_operations":2}}
+{"time":"2024-11-15T11:59:10.707285128Z","level":"WARN","msg":"No job ingredients found, not creating job artifact"}
+{"time":"2024-11-15T11:59:10.707347821Z","level":"WARN","msg":"No source type found, not creating job artifact"}
+{"time":"2024-11-15T11:59:10.707362299Z","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2024-11-15T11:59:10.75800538Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-15T11:59:12.03320437Z","level":"INFO","msg":"stream: closing","id":"5k69390k"}
+{"time":"2024-11-15T11:59:12.033269248Z","level":"INFO","msg":"handler: closed","stream_id":"5k69390k"}
+{"time":"2024-11-15T11:59:12.033291965Z","level":"INFO","msg":"writer: Close: closed","stream_id":"5k69390k"}
+{"time":"2024-11-15T11:59:12.033347136Z","level":"INFO","msg":"sender: closed","stream_id":"5k69390k"}
+{"time":"2024-11-15T11:59:12.035558853Z","level":"INFO","msg":"stream: closed","id":"5k69390k"}
