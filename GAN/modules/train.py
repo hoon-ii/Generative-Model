@@ -17,8 +17,7 @@ class GANLoss(nn.Module):
 #%%
 def train(
     train_dataloader, 
-    generator, 
-    discriminator, 
+    model,
     g_optimizer, 
     d_optimizer, 
     config, 
@@ -30,6 +29,7 @@ def train(
     batch_size = config["batch_size"]
 
     gan_loss = GANLoss()
+    model.train()
     for epoch in range(num_epoch):
         logs = {
             'd_loss': [],
@@ -53,9 +53,9 @@ def train(
             
             # Generate fake images and calculate generator loss
             z = torch.randn(batch_size, noise_size).to(device)
-            fake_images = generator(z)
+            fake_images = model.gen_step(z)
 
-            g_loss = gan_loss(discriminator(fake_images), real_label)
+            g_loss = gan_loss(model.disc_step(fake_images), real_label)
 
             # Backpropagation for generator
             g_loss.backward()
@@ -67,8 +67,8 @@ def train(
             d_optimizer.zero_grad()
             
             # Calculate discriminator loss for fake and real images
-            fake_loss = gan_loss(discriminator(fake_images.detach()), fake_label)
-            real_loss = gan_loss(discriminator(real_images), real_label)
+            fake_loss = gan_loss(model.disc_step(fake_images.detach()), fake_label)
+            real_loss = gan_loss(model.disc_step(real_images), real_label)
             d_loss = (fake_loss + real_loss) / 2
 
             # Backpropagation for discriminator
@@ -76,8 +76,8 @@ def train(
             d_optimizer.step()
 
             # Track discriminator and generator performance
-            d_performance = discriminator(real_images).mean().item()
-            g_performance = discriminator(fake_images).mean().item()
+            d_performance = model.disc_step(real_images).mean().item()
+            g_performance = model.disc_step(fake_images).mean().item()
 
             # Append losses to logs
             logs['d_loss'].append(d_loss.item())

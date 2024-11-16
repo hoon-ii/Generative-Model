@@ -1,0 +1,17 @@
+artifacts/
+assets/
+generated_samples/
+mnist_png_dir/
+wandb/
+
+# 모델 가중치 파일
+*.pth
+
+# 캐시 파일 및 디렉토리
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE 설정 파일
+.vscode/
+.idea/

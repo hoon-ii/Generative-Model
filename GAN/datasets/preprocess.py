@@ -51,10 +51,4 @@ def get_mnist_dataloader(batch_size=128, image_size=28):
         drop_last=True
     )
 
-    return train_loader, test_loader
-
-#%%
-if __name__=="__main__":
-    batch_size = 128
-    image_size = 28
-    train_loader, test_loader = get_mnist_dataloader(batch_size=batch_size, image_size=image_size)
+    return train_dataset, test_dataset,train_loader, test_loader
