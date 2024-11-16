@@ -19,7 +19,7 @@ except:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-project = "VAE"
+project = "convVAE" # put your WANDB project name
 # entity = "hwawon" # put your WANDB username
 
 run = wandb.init(
@@ -63,7 +63,7 @@ def main():
     #%%
     """model load"""
     base_name = f"{config['dataset']}_{config['latent_dim']}" 
-    model_name = f"VAE_{base_name}"
+    model_name = f"convVAE_{base_name}"
     artifact = wandb.use_artifact(
         f"{project}/{model_name}:v{config['ver']}",
         type='model')
@@ -87,7 +87,7 @@ def main():
     """model"""
     model_module = importlib.import_module('modules.model')
     importlib.reload(model_module)
-    model = model_module.VAE(config, train_dataset.EncodedInfo).to(device)
+    model = model_module.convVAE(config, train_dataset.EncodedInfo).to(device)
     
     if config["cuda"]:
         model.load_state_dict(
@@ -118,7 +118,7 @@ def main():
     figure_dir = f"./assets/figures/{base_name}"
     if not os.path.exists(figure_dir):
         os.makedirs(figure_dir)
-    figure_name = f"VAE_{base_name}_{config['seed']}"
+    figure_name = f"convVAE_{base_name}_{config['seed']}"
 
     ax.figure.savefig(f"./{figure_dir}/{figure_name}.png")
     wandb.log({"figure" : ax})

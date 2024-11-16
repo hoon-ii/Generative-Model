@@ -5,75 +5,45 @@ from torch.utils.data import DataLoader
 import math
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-#%%
-# convVAE(Conv2d layer로 구성)       
-class convVAE(nn.Module):
+#%% VAE(fc lyaer로 구성)
+class VAE(nn.Module):
     def __init__(self, config, EncodedInfo):
-        super(convVAE, self).__init__()
+        super(VAE, self).__init__()
         self.config = config
         self.channels = EncodedInfo.channels
         self.height = EncodedInfo.height
         self.width = EncodedInfo.width
+        self.input_dim = self.channels*self.height*self.width
 
         # Encoder
         en = []
-        outputpaddings = []
-        in_dim = self.channels
-        self.red_h = self.height
-        self.red_w = self.width
+        in_dim = self.input_dim
 
-        for h in config["hidden_dim"]:
-            en.append(
-                nn.Sequential(
-                    nn.Conv2d(in_channels = in_dim,
-                              out_channels = h,
-                              kernel_size = 3,
-                              stride = 2,
-                              padding = 1),
-                    nn.BatchNorm2d(h),
-                    nn.LeakyReLU()
-                )
-            )
+        for h in config["hidden_dims"]:
+            en.append(nn.Linear(in_dim, h))
+            en.append(nn.ReLU())
             in_dim = h
-            outputpaddings.append(0) if (self.red_h-1)%2 == 0 else outputpaddings.append(1)
-            self.red_h = math.floor((self.red_h-1)/2) + 1
-            self.red_w = math.floor((self.red_w-1)/2) + 1
+        en.append(nn.Linear(h, config["latent_dim"] * 2)) # mu, logvar 공간을 마련하기 위해 *2 해줌
 
+        # 신경망을 self.encoder 속성으로 정의
         self.encoder = nn.Sequential(*en)
-        # red는 Conv2d layer를 거쳐 축소된 크기
-        # kernel = 3, stride = 2, padding = 1일 때 output의 크기는 2배씩 줄어듦
-        # hidden dim의 개수만큼 Conv2d layer를 거치므로 2**(hidden dim 개수)만큼 줄어듦
-        self.hidden_ch = h
-        self.flat_dim = self.hidden_ch * self.red_h * self.red_w # 마지막 hidden dim 크기(채널 수) * 줄어든 feature map 크기(H*W)
-        self.en_fc = nn.Linear(self.flat_dim, config["latent_dim"] * 2)
         
         # Decoder
-        self.de_fc = nn.Linear(config["latent_dim"], self.flat_dim)
         de = []
-        in_dim = self.hidden_ch
-        for h, outpad in zip(reversed([self.channels]+config["hidden_dim"][:-1]), reversed(outputpaddings)):
-            de.append(
-                nn.Sequential(
-                    nn.ConvTranspose2d(
-                        in_channels = in_dim,
-                        out_channels = h,
-                        kernel_size = 3,
-                        stride = 2,
-                        padding = 1,
-                        output_padding= outpad    
-                    ),
-                    nn.BatchNorm2d(h),
-                    nn.LeakyReLU()
-                )
-            )
+        in_dim = config["latent_dim"]
+        for h in reversed(config["hidden_dims"]):
+            de.append(nn.Linear(in_dim, h))
+            de.append(nn.ReLU())
             in_dim = h
+        de.append(nn.Linear(h, self.input_dim))
         de.append(nn.Sigmoid())
+
+        # 신경망을 self.decoder 속성으로 정의
         self.decoder = nn.Sequential(*de)
-     
+
     def encode(self, x):
-        encoded = self.encoder(x)
-        encoded = encoded.view(-1, self.flat_dim) # en_fc에 넣기 위해 flatten
-        mu_logvar = self.en_fc(encoded)
+        encoded = x.view(-1, self.input_dim) 
+        mu_logvar = self.encoder(encoded)
         return mu_logvar
         
     def reparameterize(self, mu, logvar):
@@ -82,17 +52,16 @@ class convVAE(nn.Module):
         return mu + eps*std
     
     def decode(self, z):
-        decoded = self.de_fc(z)
-        decoded = decoded.view(-1, self.hidden_ch, self.red_h, self.red_w) # decode에 넣기 위해 reshape
-        decoded = self.decoder(decoded)
+        decoded = self.decoder(z)
+        decoded = decoded.view(-1, self.channels, self.height, self.width)
         return decoded
     
     def forward(self, x):
         mu_logvar = self.encode(x)
         mu, logvar = mu_logvar.chunk(2, dim = 1)
         z = self.reparameterize(mu, logvar)
-        recon_x = self.decode(z)
-        return recon_x, mu, logvar
+        recon = self.decode(z)
+        return recon, mu, logvar
     
     def generate(self, test_dataset, device):
         test_dataloader = DataLoader(
@@ -110,10 +79,9 @@ class convVAE(nn.Module):
         plt.subplots_adjust(wspace = 0.5, hspace = 0.5)
         for i in range(9):    
             ax = plt.subplot(grid[i])
-            plt.imshow(recon[i].reshape(28, 28).cpu().detach().numpy(), cmap='gray')
+            plt.imshow(recon[i].reshape(self.height, self.width).cpu().detach().numpy(), cmap='gray')
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
             ax.set_title('label : {}'.format(label[i]))
 
         return ax
-            # %%

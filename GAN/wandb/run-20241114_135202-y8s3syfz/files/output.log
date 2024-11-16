@@ -1,7 +1,0 @@
-Current device is cuda
-Traceback (most recent call last):
-  File "/root/default/Generative-Model/GAN/main.py", line 166, in <module>
-    main()
-  File "/root/default/Generative-Model/GAN/main.py", line 82, in main
-    train_loader, test_loader = dataset_module.get_mnist_dataloader(config["batch_size"], config["image_size"])
-KeyError: 'image_size'

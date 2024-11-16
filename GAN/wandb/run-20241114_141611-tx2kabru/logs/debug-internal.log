@@ -1,8 +1,0 @@
-{"time":"2024-11-14T14:16:11.808397216Z","level":"INFO","msg":"using version","core version":"0.18.7"}
-{"time":"2024-11-14T14:16:11.808456749Z","level":"INFO","msg":"created symlink","path":"/root/default/Generative-Model/GAN/wandb/run-20241114_141611-tx2kabru/logs/debug-core.log"}
-{"time":"2024-11-14T14:16:11.93448981Z","level":"INFO","msg":"created new stream","id":"tx2kabru"}
-{"time":"2024-11-14T14:16:11.934569807Z","level":"INFO","msg":"stream: started","id":"tx2kabru"}
-{"time":"2024-11-14T14:16:11.934624405Z","level":"INFO","msg":"writer: Do: started","stream_id":"tx2kabru"}
-{"time":"2024-11-14T14:16:11.934728294Z","level":"INFO","msg":"handler: started","stream_id":"tx2kabru"}
-{"time":"2024-11-14T14:16:11.934833886Z","level":"INFO","msg":"sender: started","stream_id":"tx2kabru"}
-{"time":"2024-11-14T14:16:12.321993751Z","level":"INFO","msg":"Starting system monitor"}

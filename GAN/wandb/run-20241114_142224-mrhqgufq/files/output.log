@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/root/default/Generative-Model/GAN/inference.py", line 125, in <module>
-    main()
-  File "/root/default/Generative-Model/GAN/inference.py", line 62, in main
-    config = vars(get_args(debug=True))
-  File "/root/default/Generative-Model/GAN/inference.py", line 56, in get_args
-    return parser.parse_args(argsa=[])
-TypeError: ArgumentParser.parse_args() got an unexpected keyword argument 'argsa'

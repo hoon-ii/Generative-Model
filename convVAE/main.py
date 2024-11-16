@@ -20,7 +20,7 @@ except:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-project = 'VAE'
+project = "convVAE"
 # entity = "hwawon" # put your WANDB username
 
 run = wandb.init(
@@ -50,7 +50,7 @@ def get_args(debug):
                         Dataset options: MNIST, CIFAR10
                         """)
     parser.add_argument('--hidden_dims', type=list, default=[256, 128, 64], 
-                        help="Number of neurons")
+                        help="Number of channels.")
     parser.add_argument('--latent_dim', type=int, default=20, 
                         help='Dimension of latent space.')
 
@@ -103,7 +103,7 @@ def main():
     model_module = importlib.import_module('modules.model')
     importlib.reload(model_module)
 
-    model = model_module.VAE(config, train_dataset.EncodedInfo).to(device)
+    model = model_module.convVAE(config, train_dataset.EncodedInfo).to(device)
     #%%
     optimizer = optim.Adam(model.parameters(), lr=config["lr"])
     #%%
@@ -128,7 +128,7 @@ def main():
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    model_name = f"VAE_{base_name}_{config['seed']}"
+    model_name = f"convVAE_{base_name}_{config['seed']}"
 
     torch.save(model.state_dict(), f"./{model_dir}/{model_name}.pth")
     artifact = wandb.Artifact(
