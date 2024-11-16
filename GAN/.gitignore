@@ -3,6 +3,7 @@ assets/
 generated_samples/
 mnist_png_dir/
 wandb/
+wandb_api.txt
 
 *.pth
 
