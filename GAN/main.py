@@ -32,13 +32,12 @@ except:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-project="GAN" # put your WANDB project name
-# entity = "shoon06" # put your WANDB username
+project="GAN"
 
 run = wandb.init(
     project=project, 
     # entity=entity, 
-    tags=["train"], # put tags of this python project
+    tags=["train"],
 )
 
 #%%
@@ -70,8 +69,8 @@ def get_args(debug=False):
         return parser.parse_args()
 
 def main():
-    #%% configuration
-    config = vars(get_args(debug=False))  # default configuration
+    #%%
+    config = vars(get_args(debug=False))
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     config['device'] = device 
     print('Current device is', device)
@@ -115,7 +114,6 @@ def main():
     )
     #%%
     """ Model Save """
-    # Directory for saving models
     base_name = f"{config['dataset']}_{config['lr']}_{config['batch_size']}"
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
@@ -128,7 +126,6 @@ def main():
         type='model',
         metadata=config)
 
-    # Add model files and main script to artifacts
     artifact.add_file(f"./{model_dir}/{model_name}.pth")
     artifact.add_file('./main.py')
     artifact.add_file('./model/model.py')

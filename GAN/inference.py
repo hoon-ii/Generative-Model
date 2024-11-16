@@ -1,5 +1,4 @@
-# inference.py
-#%% Imports
+#%%
 import os, sys
 import argparse
 import importlib
@@ -10,7 +9,6 @@ from torchvision.utils import save_image
 from modules.utils import set_random_seed
 from evaluate.evaluate import convert2png, calculate_fid
 
-# W&B 연결 설정
 import subprocess
 try:
     import wandb
@@ -21,14 +19,14 @@ except ImportError:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-#%% W&B 프로젝트 설정
-project = "GAN"  # W&B 프로젝트 이름 설정
+#%%
+project = "GAN" 
 run = wandb.init(
     project=project, 
-    tags=['inference'],  # 태그 설정
+    tags=['inference'], 
 )
 
-#%% Helper function to parse arguments
+#%%
 def str2bool(v):
     if isinstance(v, bool):
         return v
@@ -60,9 +58,9 @@ def get_args(debug=False):
     else:
         return parser.parse_args()
 
-#%% Main function
+#%%
 def main():
-    #%% configuration
+    #%%
     config = vars(get_args(debug=True))
     """ dataset """
     dataset_module = importlib.import_module('datasets.preprocess')
@@ -119,7 +117,7 @@ def main():
     wandb.log({"Total Number of GAN Parameters (k)": (discriminator_num_params + generator_num_params) / 1_000})
     #%%
     """ Image Generation """
-    #%% 샘플 생성 및 저장
+    #%%
     num_samples = config['num_samples']
     generated_images = model.generate(num_samples=num_samples)
 
@@ -136,7 +134,7 @@ def main():
     fid_score = calculate_fid(config, origin_png_dir, output_dir)
     print("fid_score >>> ",fid_score)
     wandb.log({"FID": fid_score})
-    # Finish W&B run
+    #%%
     wandb.finish()
     print("Inference Done.")
 
