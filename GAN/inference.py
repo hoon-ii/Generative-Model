@@ -3,7 +3,6 @@ import os, sys
 import argparse
 import importlib
 import torch
-from pytorch_fid import fid_score
 from torchvision.utils import save_image
 
 from modules.utils import set_random_seed
