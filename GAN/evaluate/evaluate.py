@@ -17,7 +17,7 @@ def convert2png(dataset, origin_png_dir):
     
     print(f"{len(os.listdir(origin_png_dir))} images are done.")
 
-def calculate_fid(config, origin_png_dir, output_dir):
+def evalutae(config, origin_png_dir, output_dir):
     fid_value = fid_score.calculate_fid_given_paths(
         [origin_png_dir, output_dir],
         batch_size=config["FID_size"],
