@@ -3,13 +3,17 @@ assets/
 generated_samples/
 mnist_png_dir/
 wandb/
+logs/
+
 wandb_api.txt
 
 *.pth
 
 __pycache__/
+
 *.pyc
 *.pyo
+*.sh
 
 .vscode/
 .idea/
