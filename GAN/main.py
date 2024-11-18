@@ -42,7 +42,7 @@ def get_args(debug=False):
     parser.add_argument("--epochs", type=int, default=30, help="number of epochs of training")
     parser.add_argument("--batch_size", type=int, default=128, help="size of the batches")
     parser.add_argument("--lr_d", type=float, default=0.0001, help="adam: learning rate")
-    parser.add_argument("--lr_g", type=float, default=0.0002, help="adam: learning rate")
+    parser.add_argument("--lr_g", type=float, default=0.02, help="adam: learning rate")
     parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
     parser.add_argument("--channels", type=int, default=1, help="number of image channels")
     parser.add_argument("--noise_size", default=256, type=int)
@@ -102,7 +102,7 @@ def main():
     )
     #%%
     """ Model Save """
-    base_name = f"{config['dataset']}_{config['lr']}_{config['batch_size']}"
+    base_name = f"{config['dataset']}_{config['lr_g']}_{config['lr_d']}_{config['batch_size']}"
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)

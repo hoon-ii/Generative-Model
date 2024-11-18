@@ -77,12 +77,10 @@ def train(
             logs['d_performance'].append(d_performance)
             logs['g_performance'].append(g_performance)
 
-            if (i + 1) % 150 == 0:
-                print("Epoch [{}/{}], Step [{}/{}], d_loss: {:.5f}, g_loss: {:.5f}"
-                      .format(epoch + 1, num_epoch, i + 1, len(train_dataloader), d_loss.item(), g_loss.item()))
-
-        print("Epoch [{}] Discriminator performance: {:.2f}, Generator performance: {:.2f}"
-              .format(epoch + 1, np.mean(logs['d_performance']), np.mean(logs['g_performance'])))
+        if (epoch + 1) % 10 == 0:
+            print(f"Epoch [{epoch + 1}/{num_epoch}]")
+            print(f"Discriminator Loss: {np.mean(logs['d_loss'])}, Generator Loss: {np.mean(logs['g_loss'])}")
+            print(f"Discriminator performance: {np.mean(logs['d_performance']):.2f}, Generator performance: {np.mean(logs['g_performance']):.2f}")
 
         wandb.log({
             'epoch': epoch + 1,

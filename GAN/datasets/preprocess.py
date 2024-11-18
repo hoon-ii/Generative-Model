@@ -28,13 +28,13 @@ def get_mnist_dataloader(batch_size=128, image_size=28):
         root="../mnist_data",
         train=True,
         transform=transform,
-        download=False
+        download=True
     )
     test_dataset = datasets.MNIST(
         root="../mnist_data",
         train=False,
         transform=transform,
-        download=False
+        download=True
     )
 
     # Create DataLoaders for train and test datasets

@@ -62,7 +62,6 @@ class GAN(nn.Module):
     def gen_step(self, x):
         return self.Generator(x)
 
-    @torch.no_grad()
     def generate(self, num_samples, init_noise=None):
         if init_noise is not None:
             noise = init_noise
