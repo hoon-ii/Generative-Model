@@ -39,13 +39,13 @@ def get_args(debug=False):
     parser.add_argument("--seed", type=int, default=0, help="fix the seed")
     
     parser.add_argument("--dataset", type=str, default="mnist")
-    parser.add_argument("--epochs", type=int, default=30, help="number of epochs of training")
+    parser.add_argument("--epochs", type=int, default=300, help="number of epochs of training")
     parser.add_argument("--batch_size", type=int, default=128, help="size of the batches")
-    parser.add_argument("--lr_d", type=float, default=0.0001, help="adam: learning rate")
-    parser.add_argument("--lr_g", type=float, default=0.02, help="adam: learning rate")
+    parser.add_argument("--lr_d", type=float, default=0.000001, help="adam: learning rate")
+    parser.add_argument("--lr_g", type=float, default=0.000002, help="adam: learning rate")
     parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
     parser.add_argument("--channels", type=int, default=1, help="number of image channels")
-    parser.add_argument("--noise_size", default=256, type=int)
+    parser.add_argument("--noise_size", default=512, type=int)
 
     parser.add_argument("--hidden_size1", default=256, type=int)
     parser.add_argument("--hidden_size2", default=512, type=int)
