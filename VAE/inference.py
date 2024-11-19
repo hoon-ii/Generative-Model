@@ -53,7 +53,7 @@ def get_args(debug=False):
                         help="""
                         Dataset options: MNIST, CIFAR10
                         """)
-    parser.add_argument('--latent_dim', type=int, default=20, 
+    parser.add_argument('--latent_dim', type=int, default=64, 
                         help='Dimension of latent space.')
 
     parser.add_argument("--FID_size",type=int, default=1024)
@@ -82,9 +82,9 @@ def main():
     model_dir = artifact.download()
     model_name = [x for x in os.listdir(model_dir) if x.endswith(f"{config['seed']}.pth")][0]
     #%%
-    config["cuda"] = torch.cuda.is_available()
+    config["device"] = torch.cuda.is_available()
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-
+    config['device'] = device
     set_random_seed(config["seed"])
     wandb.config.update(config)
     #%%
@@ -99,7 +99,7 @@ def main():
     importlib.reload(model_module)
     model = model_module.VAE(config, train_dataset.EncodedInfo).to(device)
     
-    if config["cuda"]:
+    if config["device"]:
         model.load_state_dict(
             torch.load(
                 model_dir + "/" + model_name
@@ -126,7 +126,7 @@ def main():
     """ Image Generation """
     #%%
     num_samples = config['num_samples']
-    generated_images = model.generate(test_dataset, num_samples, device)
+    generated_images = model.generate(train_dataset, num_samples, device)
 
     output_dir = f"./generated_samples/{model_name}"
     if not os.path.exists(output_dir):
@@ -137,7 +137,7 @@ def main():
     wandb.log({"generated_images dir": output_dir})
 
     origin_png_dir = f"./{config['dataset']}_png_dir"
-    convert2png(test_dataset, origin_png_dir)
+    convert2png(train_dataset, origin_png_dir)
     fid_score = evalutae(config, origin_png_dir, output_dir)
     print("fid_score >>> ",fid_score)
     wandb.log({"FID": fid_score})

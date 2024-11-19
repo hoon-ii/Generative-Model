@@ -1,7 +1,7 @@
 artifacts/
 assets/
 generated_samples/
-mnist_png_dir/
+MNIST_png_dir/
 wandb/
 logs/
 data/
@@ -15,6 +15,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.sh
+*.png
 
 .vscode/
 .idea/
+

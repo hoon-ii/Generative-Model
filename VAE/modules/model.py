@@ -86,12 +86,25 @@ class VAE(nn.Module):
 
     #     return ax
 
-    def generate(self, test_dataset, num_samples, device):
-        test_dataloader = DataLoader(
-            test_dataset, 
+    # def generate(self, test_dataset, num_samples, device):
+    #     test_dataloader = DataLoader(
+    #         test_dataset, 
+    #         batch_size=num_samples,
+    #     )
+    #     batch, _ = next(iter(test_dataloader))
+        
+    #     with torch.no_grad():
+    #         batch = batch.to(device)
+    #         generated_images, _, _ = self(batch)
+    #     return generated_images
+    
+
+    def generate(self, train_dataset, num_samples, device):
+        train_dataloader = DataLoader(
+            train_dataset, 
             batch_size=num_samples,
         )
-        batch, _ = next(iter(test_dataloader))
+        batch, _ = next(iter(train_dataloader))
         
         with torch.no_grad():
             batch = batch.to(device)
