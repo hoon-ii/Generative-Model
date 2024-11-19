@@ -46,10 +46,11 @@ def get_args(debug=False):
     parser.add_argument("--lr_d", type=float, default=0.0001, help="adam: learning rate")
     parser.add_argument("--lr_g", type=float, default=0.0002, help="adam: learning rate")
     parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
-    parser.add_argument("--hidden_size1", type=int, default=256, help="hidden dim")
-    parser.add_argument("--hidden_size2", type=int, default=512, help="hidden dim")
-    parser.add_argument("--hidden_size3", type=int, default=1024, help="hidden dim")
     parser.add_argument("--noise_size", type=int, default=512, help="noise size")
+
+    parser.add_argument("--base_ch", type=list, default=256)
+    parser.add_argument("--ch_mult", type=list, default=2, help="3 means that 1>2>4>8 times")
+
     parser.add_argument("--FID_size",type=int, default=1024)
     parser.add_argument("--dims", type=int, default=2048)
     
@@ -64,7 +65,7 @@ def main():
     config = vars(get_args(debug=False))
     """model load"""
     base_name = f"{config['dataset']}_{config['lr_g']}_{config['lr_d']}_{config['batch_size']}"
-    model_name = f"GAN_{base_name}"
+    model_name = f"CGAN_{base_name}"
     artifact = wandb.use_artifact(
         f"{project}/{model_name}:v{config['ver']}",
         type='model'

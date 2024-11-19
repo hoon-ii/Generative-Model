@@ -48,7 +48,8 @@ def get_args(debug=False):
     parser.add_argument("--channels", type=int, default=1, help="number of image channels")
     parser.add_argument("--noise_size", default=512, type=int)
 
-    parser.add_argument("--hidden_sizes", type=list, defualt=[256, 512, 1024], help="revision needed : use CH_mult, Base_ch")
+    parser.add_argument("--base_ch", type=list, default=256)
+    parser.add_argument("--ch_mult", type=list, default=2, help="3 means that 1>2>4>8 times")
 
     if debug:
         return parser.parse_args(argsa=[])
@@ -68,13 +69,12 @@ def main():
     dataset_module = importlib.import_module('datasets.preprocess')
     importlib.reload(dataset_module)
     train_dataset, _, train_loader, _ = dataset_module.get_mnist_dataloader(config["batch_size"], config["img_size"])
-    train_label = train_dataset.targets
     config["num_classes"] = Counter(train_dataset.targets.numpy())
     #%%
     """ Model """
-    gan_module = importlib.import_module('model.model')
-    importlib.reload(gan_module)
-    model = gan_module.CGAN(config)
+    cgan_module = importlib.import_module('model.model')
+    importlib.reload(cgan_module)
+    model = cgan_module.CGAN(config)
     model.to(device)
     #%%
     """number of parameters"""
@@ -127,5 +127,3 @@ def main():
 
 if __name__=="__main__":
     main()
-
-#%% HIHI 222

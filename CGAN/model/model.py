@@ -6,7 +6,8 @@ class Discriminator(nn.Module):
     def __init__(self, config):
         super(Discriminator, self).__init__()
         self.img_size = config["img_size"] ** 2
-        self.hidden_sizes = config["hidden_size"]
+        self.hidden_sizes = [] 
+        self.hidden_sizes.append(config["base_ch"] * (2**i) for i in range(config['ch_mult']+1))
         self.num_classes = config["num_classes"]
 
         self.embedder = nn.Embedding(self.num_classes, self.img_size)
@@ -35,7 +36,8 @@ class Generator(nn.Module):
         self.img_size = config["img_size"] ** 2  
         self.noise_size = config["noise_size"]
         
-        self.hidden_sizes = config["hidden_size"]
+        self.hidden_sizes = [] 
+        self.hidden_sizes.append(config["base_ch"] * (2**i) for i in range(config['ch_mult']+1))
         self.num_classes = config["num_classes"]
         
         self.embedder = nn.Embedding(self.num_classes, self.num_classes)
