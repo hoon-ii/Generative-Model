@@ -1,6 +1,6 @@
 # Txt2Img Generation: Understanding Generative AI Models with Text Condition
 
-This repository contains the code and resources for the poster presentation titled **"Txt2Img Generation: Understanding Generative AI Models with Text Condition"**, presented by undergraduate researchers at **2024 Seoul National University of Science and Technology (Univ. of Seoul)**.
+This repository contains the code and resources for the poster presentation titled **"Txt2Img Generation: Understanding Generative AI Models with Text Condition"**, presented by undergraduate researchers at **2024 University of Seoul (Univ. of Seoul)**.
 
 ## Overview
 
