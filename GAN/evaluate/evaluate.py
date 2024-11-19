@@ -24,4 +24,7 @@ def evalutae(config, origin_png_dir, output_dir):
         device=config['device'],
         dims=config["dims"]
     )
-    return fid_value
+
+    IS_value = 0
+    return [fid_value, IS_value] 
+
