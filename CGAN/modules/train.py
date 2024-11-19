@@ -15,7 +15,7 @@ class CGANLoss(nn.Module):
         return self.criterion(prediction, target)
 
 #%% CGAN Training Function
-def train_cgan(
+def train(
     train_dataloader, 
     model,
     g_optimizer, 

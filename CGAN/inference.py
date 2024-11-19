@@ -19,7 +19,7 @@ except ImportError:
     import wandb
 
 #%%
-project = "GAN" 
+project = "CGAN" 
 run = wandb.init(
     project=project, 
     tags=['inference'], 
@@ -77,7 +77,7 @@ def main():
     model_name = [x for x in os.listdir(model_dir) if x.endswith(f"{config['seed']}.pth")][0]
     
     config["cuda"] = torch.cuda.is_available()
-    print(f"Config after argparse parsing: {config}")  # 확인용 로그 추가
+    print(f"Config after argparse parsing: {config}") 
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     print('device is', device)
     wandb.config.update(config)

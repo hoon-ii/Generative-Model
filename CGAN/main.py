@@ -41,15 +41,15 @@ def get_args(debug=False):
     
     parser.add_argument("--dataset", type=str, default="mnist")
     parser.add_argument("--epochs", type=int, default=10, help="number of epochs of training")
-    parser.add_argument("--batch_size", type=int, default=128, help="size of the batches")
-    parser.add_argument("--lr_d", type=float, default=0.000001, help="adam: learning rate")
-    parser.add_argument("--lr_g", type=float, default=0.0000005, help="adam: learning rate")
+    parser.add_argument("--batch_size", type=int, default=64, help="size of the batches")
+    parser.add_argument("--lr_d", type=float, default=0.000005, help="adam: learning rate")
+    parser.add_argument("--lr_g", type=float, default=0.00001, help="adam: learning rate")
     parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
     parser.add_argument("--channels", type=int, default=1, help="number of image channels")
-    parser.add_argument("--noise_size", default=512, type=int)
+    parser.add_argument("--noise_size", default=128, type=int)
 
-    parser.add_argument("--base_ch", type=list, default=256)
-    parser.add_argument("--ch_mult", type=list, default=2, help="3 means that 1>2>4>8 times")
+    parser.add_argument("--base_ch", type=int, default=256)
+    parser.add_argument("--ch_mult", type=int, default=2, help="3 means that 1>2>4>8 times")
 
     if debug:
         return parser.parse_args(argsa=[])
@@ -69,7 +69,7 @@ def main():
     dataset_module = importlib.import_module('datasets.preprocess')
     importlib.reload(dataset_module)
     train_dataset, _, train_loader, _ = dataset_module.get_mnist_dataloader(config["batch_size"], config["img_size"])
-    config["num_classes"] = Counter(train_dataset.targets.numpy())
+    config["num_classes"] = len(Counter(train_dataset.targets.numpy()))
     #%%
     """ Model """
     cgan_module = importlib.import_module('model.model')
@@ -79,8 +79,8 @@ def main():
     #%%
     """number of parameters"""
     count_parameters = lambda model: sum(p.numel() for p in model.parameters() if p.requires_grad)
-    discriminator_num_params = count_parameters(model.Discriminator)
-    generator_num_params = count_parameters(model.Generator)
+    discriminator_num_params = count_parameters(model.discriminator)
+    generator_num_params = count_parameters(model.generator)
     print(f"Number of DISC Parameters: {discriminator_num_params/1_000}k")
     print(f"Number of GEN Parameters: {generator_num_params/1_000}k")
     wandb.log({"Number of DISC Parameters (k)": discriminator_num_params / 1_000})
@@ -90,8 +90,8 @@ def main():
     """ Train """
     CGAN_train_module = importlib.import_module('modules.train')
     importlib.reload(CGAN_train_module)
-    d_optimizer = torch.optim.Adam(model.Discriminator.parameters(), lr=config["lr_d"])
-    g_optimizer = torch.optim.Adam(model.Generator.parameters(), lr=config["lr_g"])
+    d_optimizer = torch.optim.Adam(model.discriminator.parameters(), lr=config["lr_d"])
+    g_optimizer = torch.optim.Adam(model.generator.parameters(), lr=config["lr_g"])
 
     CGAN_train_module.train(
         train_loader, 
