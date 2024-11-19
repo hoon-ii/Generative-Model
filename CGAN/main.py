@@ -40,7 +40,7 @@ def get_args(debug=False):
     parser.add_argument("--seed", type=int, default=0, help="fix the seed")
     
     parser.add_argument("--dataset", type=str, default="mnist")
-    parser.add_argument("--epochs", type=int, default=10, help="number of epochs of training")
+    parser.add_argument("--epochs", type=int, default=300, help="number of epochs of training")
     parser.add_argument("--batch_size", type=int, default=64, help="size of the batches")
     parser.add_argument("--lr_d", type=float, default=0.000005, help="adam: learning rate")
     parser.add_argument("--lr_g", type=float, default=0.00001, help="adam: learning rate")
@@ -107,7 +107,7 @@ def main():
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    model_name = f"CGAN_{base_name}"
+    model_name = f"CGAN_{base_name}_{config["seed"]}"
 
     torch.save(model.state_dict(), f"./{model_dir}/{model_name}.pth")
     artifact = wandb.Artifact(
