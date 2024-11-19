@@ -1,5 +1,4 @@
-Txt2ImgGeneration:UnderstandingGenerativeAI
- ModelswithTextCondition
+### Txt2ImgGeneration:UnderstandingGenerativeAI ModelswithTextCondition
 
 
 2024.11.14.
