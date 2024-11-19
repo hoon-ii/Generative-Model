@@ -107,7 +107,7 @@ def main():
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    model_name = f"CGAN_{base_name}_{config["seed"]}"
+    model_name = f"CGAN_{base_name}_{config['seed']}"
 
     torch.save(model.state_dict(), f"./{model_dir}/{model_name}.pth")
     artifact = wandb.Artifact(
