@@ -63,25 +63,37 @@ class VAE(nn.Module):
         recon = self.decode(z)
         return recon, mu, logvar
     
-    def generate(self, test_dataset, device):
+    # def generate(self, test_dataset, device):
+    #     test_dataloader = DataLoader(
+    #         test_dataset, 
+    #         batch_size=64,
+    #     )
+    #     batch, label = next(iter(test_dataloader))
+        
+    #     with torch.no_grad():
+    #         batch, label = batch.to(device), label.to(device)
+    #         recon, mu, logvar = self(batch)
+       
+    #     grid = gridspec.GridSpec(3, 3)
+    #     plt.figure(figsize = (10, 10))
+    #     plt.subplots_adjust(wspace = 0.5, hspace = 0.5)
+    #     for i in range(9):    
+    #         ax = plt.subplot(grid[i])
+    #         plt.imshow(recon[i].reshape(self.height, self.width).cpu().detach().numpy(), cmap='gray')
+    #         ax.get_xaxis().set_visible(False)
+    #         ax.get_yaxis().set_visible(False)
+    #         ax.set_title('label : {}'.format(label[i]))
+
+    #     return ax
+
+    def generate(self, test_dataset, num_samples, device):
         test_dataloader = DataLoader(
             test_dataset, 
-            batch_size=64,
+            batch_size=num_samples,
         )
-        batch, label = next(iter(test_dataloader))
+        batch, _ = next(iter(test_dataloader))
         
         with torch.no_grad():
-            batch, label = batch.to(device), label.to(device)
-            recon, mu, logvar = self(batch)
-       
-        grid = gridspec.GridSpec(3, 3)
-        plt.figure(figsize = (10, 10))
-        plt.subplots_adjust(wspace = 0.5, hspace = 0.5)
-        for i in range(9):    
-            ax = plt.subplot(grid[i])
-            plt.imshow(recon[i].reshape(self.height, self.width).cpu().detach().numpy(), cmap='gray')
-            ax.get_xaxis().set_visible(False)
-            ax.get_yaxis().set_visible(False)
-            ax.set_title('label : {}'.format(label[i]))
-
-        return ax
+            batch = batch.to(device)
+            generated_images, _, _ = self(batch)
+        return generated_images

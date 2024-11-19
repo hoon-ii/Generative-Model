@@ -3,10 +3,12 @@ import os
 import torch
 import argparse
 import importlib
-
+from torchvision.utils import save_image
 import torch
 import matplotlib.pyplot as plt
 from modules.utils import set_random_seed
+from evaluate.evaluate import convert2png, evalutae
+
 #%%
 import sys
 import subprocess
@@ -41,7 +43,9 @@ def str2bool(v):
 #%%
 def get_args(debug=False):
     parser = argparse.ArgumentParser('parameters')
-    
+
+    parser.add_argument("--num_samples", type=int, default=1000)
+
     parser.add_argument('--ver', type=int, default=0, 
                         help='model version number')
     
@@ -49,13 +53,19 @@ def get_args(debug=False):
                         help="""
                         Dataset options: MNIST, CIFAR10
                         """)
-    parser.add_argument('--latent_dim', type=int, default=128, 
+    parser.add_argument('--latent_dim', type=int, default=20, 
                         help='Dimension of latent space.')
+
+    parser.add_argument("--FID_size",type=int, default=1024)
+    parser.add_argument("--dims", type=int, default=2048)
+
+
     if debug:
         return parser.parse_args(args=[])
     else:    
         return parser.parse_args()
     
+
 #%%
 def main():
     #%%
@@ -73,7 +83,8 @@ def main():
     model_name = [x for x in os.listdir(model_dir) if x.endswith(f"{config['seed']}.pth")][0]
     #%%
     config["cuda"] = torch.cuda.is_available()
-    device = torch.device('cuda:0') if torch.cuda.is_available() else torch.device('cpu')
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+
     set_random_seed(config["seed"])
     wandb.config.update(config)
     #%%
@@ -81,8 +92,7 @@ def main():
     dataset_module = importlib.import_module('datasets.preprocess')
     importlib.reload(dataset_module)
     train_dataset = dataset_module.CustomMNIST(train=True)
-    test_dataset = dataset_module.CustomMNIST(train=False)
-    
+    test_dataset = dataset_module.CustomMNIST(train=False)    
     #%%
     """model"""
     model_module = importlib.import_module('modules.model')
@@ -111,20 +121,26 @@ def main():
     wandb.log({"Number of Parameters": model_params /1000000})
     #%%
     """generation"""
-    ax = model.generate(test_dataset, device)
+    # ax = model.generate(test_dataset)
     #%%
-    """image save"""
-    base_name = f"{config['dataset']}_{config['latent_dim']}"
-    figure_dir = f"./assets/figures/{base_name}"
-    if not os.path.exists(figure_dir):
-        os.makedirs(figure_dir)
-    figure_name = f"VAE_{base_name}_{config['seed']}"
+    """ Image Generation """
+    #%%
+    num_samples = config['num_samples']
+    generated_images = model.generate(test_dataset, num_samples, device)
 
-    ax.figure.savefig(f"./{figure_dir}/{figure_name}.png")
-    wandb.log({"figure" : ax})
-    #%%
-    wandb.config.update(config, allow_val_change=True)
-    wandb.run.finish()
+    output_dir = f"./generated_samples/{model_name}"
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    for idx, img in enumerate(generated_images):
+        file_name = f"{config['dataset']}_{idx+1:04d}.png"
+        save_image(img, os.path.join(output_dir, file_name), normalize=True)
+    wandb.log({"generated_images dir": output_dir})
+
+    origin_png_dir = f"./{config['dataset']}_png_dir"
+    convert2png(test_dataset, origin_png_dir)
+    fid_score = evalutae(config, origin_png_dir, output_dir)
+    print("fid_score >>> ",fid_score)
+    wandb.log({"FID": fid_score})
 #%% 
 if __name__ == "__main__":
     main()  

@@ -49,7 +49,7 @@ def get_args(debug):
                         help="""
                         Dataset options: MNIST, CIFAR10
                         """)
-    parser.add_argument('--hidden_dims', type=list, default=[256, 128, 64], 
+    parser.add_argument('--hidden_dims', type=list, default=[512, 256, 128, 64], 
                         help="Number of neurons")
     parser.add_argument('--latent_dim', type=int, default=20, 
                         help='Dimension of latent space.')
@@ -68,7 +68,7 @@ def get_args(debug):
     parser.add_argument('--kld_weight', type=float, default=0.00025, 
                         help='Weight for the KL divergence loss.')
     # Trainer parameters
-    parser.add_argument('--epochs', type=int, default=100, 
+    parser.add_argument('--epochs', type=int, default=10, 
                         help='Maximum number of training epochs.')
     
     if debug:
@@ -143,6 +143,7 @@ def main():
     #%%
     wandb.config.update(config, allow_val_change=True)
     wandb.run.finish()
+    print("W&B run finished.")
 #%%
 if __name__ == '__main__':
     main()
