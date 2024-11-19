@@ -1,4 +1,5 @@
 #%%
+import torch
 import torch.nn as nn
 
 class Discriminator(nn.Module):
@@ -47,3 +48,30 @@ class Generator(nn.Module):
         x = self.linear4(x)
         x = self.tanh(x)
         return x
+
+class GAN(nn.Module):
+    def __init__(self, config):
+        super(GAN, self).__init__()
+        self.config = config
+        self.Discriminator = Discriminator(config)
+        self.Generator = Generator(config)
+
+    def disc_step(self, x):
+        return self.Discriminator(x)
+    
+    def gen_step(self, x):
+        return self.Generator(x)
+
+    def generate(self, num_samples, init_noise=None):
+        if init_noise is not None:
+            noise = init_noise
+        else:
+            noise = torch.randn((num_samples, self.config["noise_size"]),
+                                device=self.config["device"])
+        generated_images = self.Generator(noise).view(
+            num_samples,
+            1,
+            self.config["img_size"],
+            self.config["img_size"])
+        
+        return generated_images
