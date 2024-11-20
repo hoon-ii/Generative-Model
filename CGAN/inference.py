@@ -91,9 +91,9 @@ def main():
     train_dataset, _, _, _ = dataset_module.get_mnist_dataloader(image_size=config["img_size"])
     #%%
     """ model load """
-    gan_module = importlib.import_module('model.model')
-    importlib.reload(gan_module)
-    model = gan_module.GAN(config)
+    cgan_module = importlib.import_module('model.model')
+    importlib.reload(cgan_module)
+    model = cgan_module.CGAN(config)
     model.to(device)
     model.eval()
     if config["cuda"]:
@@ -113,8 +113,8 @@ def main():
     #%%
     """number of parameters"""
     count_parameters = lambda model: sum(p.numel() for p in model.parameters() if p.requires_grad)
-    discriminator_num_params = count_parameters(model.Discriminator)
-    generator_num_params = count_parameters(model.Generator)
+    discriminator_num_params = count_parameters(model.discriminator)
+    generator_num_params = count_parameters(model.generator)
     print(f"Number of DISC Parameters: {discriminator_num_params/1_000:.3f}k")
     print(f"Number of GEN Parameters: {generator_num_params/1_000:.3f}k")
     wandb.log({"Number of DISC Parameters (k)": discriminator_num_params / 1_000})

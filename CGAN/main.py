@@ -42,6 +42,8 @@ def get_args(debug=False):
     parser.add_argument("--dataset", type=str, default="mnist")
     parser.add_argument("--epochs", type=int, default=300, help="number of epochs of training")
     parser.add_argument("--batch_size", type=int, default=64, help="size of the batches")
+    parser.add_argument("--b1", type=float, default=0.5, help="adam: decay of first order momentum of gradient")
+    parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
     parser.add_argument("--lr_d", type=float, default=0.000005, help="adam: learning rate")
     parser.add_argument("--lr_g", type=float, default=0.00001, help="adam: learning rate")
     parser.add_argument("--img_size", type=int, default=28, help="size of each image dimension")
@@ -75,7 +77,7 @@ def main():
     cgan_module = importlib.import_module('model.model')
     importlib.reload(cgan_module)
     model = cgan_module.CGAN(config)
-    model.to(device)
+    model.train().to(device)
     #%%
     """number of parameters"""
     count_parameters = lambda model: sum(p.numel() for p in model.parameters() if p.requires_grad)
