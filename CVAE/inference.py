@@ -21,7 +21,7 @@ except:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-project = "VAE"
+project = "CVAE"
 # entity = "hwawon" # put your WANDB username
 
 run = wandb.init(
@@ -73,7 +73,7 @@ def main():
     #%%
     """model load"""
     base_name = f"{config['dataset']}_{config['latent_dim']}" 
-    model_name = f"VAE_{base_name}"
+    model_name = f"CVAE_{base_name}"
     artifact = wandb.use_artifact(
         f"{project}/{model_name}:v{config['ver']}",
         type='model')
@@ -97,7 +97,7 @@ def main():
     """model"""
     model_module = importlib.import_module('modules.model')
     importlib.reload(model_module)
-    model = model_module.VAE(config, train_dataset.EncodedInfo).to(device)
+    model = model_module.CVAE(config, train_dataset.EncodedInfo).to(device)
     
     if config["device"]:
         model.load_state_dict(
@@ -126,7 +126,7 @@ def main():
     """ Image Generation """
     #%%
     num_samples = config['num_samples']
-    generated_images = model.generate(train_dataset, num_samples, device)
+    generated_images = model.generate(test_dataset, num_samples, device)
 
     output_dir = f"./generated_samples/{model_name}"
     if not os.path.exists(output_dir):
@@ -137,7 +137,7 @@ def main():
     wandb.log({"generated_images dir": output_dir})
 
     origin_png_dir = f"./{config['dataset']}_png_dir"
-    convert2png(train_dataset, origin_png_dir)
+    convert2png(test_dataset, origin_png_dir)
     fid_score = evalutae(config, origin_png_dir, output_dir)
     print("fid_score >>> ",fid_score)
     wandb.log({"FID": fid_score})

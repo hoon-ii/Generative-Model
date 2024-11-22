@@ -1,13 +1,14 @@
-#%%
-import os
 import argparse
-import importlib
-#%%
 import torch
+from torchvision import datasets, transforms
+from torchvision.utils import save_image, make_grid
 from torch.utils.data import DataLoader
-import torch.optim as optim
-
+import yaml
+import wandb
+import os
+from modules.model import CVAE  # CVAE 모델이 저장된 파일을 'cvae_model.py'로 가정
 from modules.utils import set_random_seed
+import importlib
 #%%
 import sys
 import subprocess
@@ -20,7 +21,7 @@ except:
     subprocess.run(["wandb", "login"], input=key[0], encoding='utf-8')
     import wandb
 
-project = 'VAE'
+project = 'CVAE'
 # entity = "hwawon" # put your WANDB username
 
 run = wandb.init(
@@ -29,7 +30,6 @@ run = wandb.init(
     tags=["train"], # put tags of this python project
 )
 
-#%%
 def str2bool(v):
     if isinstance(v, bool):
         return v
@@ -39,7 +39,7 @@ def str2bool(v):
         return False
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
-#%%
+
 def get_args(debug):
     parser = argparse.ArgumentParser('parameters')
     parser.add_argument("--seed", default=0, type=int,
@@ -57,6 +57,7 @@ def get_args(debug):
     # Data parameters
     parser.add_argument('--batch_size', type=int, default=64, 
                         help='Training batch size.')
+    parser.add_argument('--num_classes', type = int, default = 10, help = 'number of classes')
 
     # Experiment parameters
     parser.add_argument('--lr', type=float, default=0.005, 
@@ -70,65 +71,80 @@ def get_args(debug):
     # Trainer parameters
     parser.add_argument('--epochs', type=int, default=30, 
                         help='Maximum number of training epochs.')
-    
+    parser.add_argument('--encoded_info', default = {'channels':1, 'height':28, 'width':28},
+                        help = 'channels, height, width')
     if debug:
         return parser.parse_args(args=[])
     else:
-        return parser.parse_args()
+        return parser.parse_args()   
 
-#%%
 def main():
-    #%%
-    config = vars(get_args(debug=True)) # default configuration
+    config = vars(get_args(debug = False))
     set_random_seed(config['seed'])
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('Current device is', device)
     wandb.config.update(config)
-    #%%
-    """dataset"""
+
+    'dataset'
     dataset_module = importlib.import_module('datasets.preprocess')
     importlib.reload(dataset_module)
 
     if config['dataset'] == 'MNIST':
         train_dataset = dataset_module.CustomMNIST(train=True)
+        test_dataset = dataset_module.CustomMNIST(train = False)
     elif config['dataset'] == 'CIFAR10':
         train_dataset = dataset_module.CustomCIFAR10(train = True)
+        test_dataset = dataset_module.CustomCIFAR10(train = False)
 
     train_dataloader = DataLoader(
-        train_dataset, 
-        batch_size=config["batch_size"]
+        train_dataset,
+        batch_size = config['batch_size'],
+        shuffle = True
     )
-    #%%
-    """model"""
+    test_dataloader = DataLoader(
+        test_dataset,
+        batch_size = 100,
+        shuffle = False
+    )
+
+    # Model, loss function, and optimizer
     model_module = importlib.import_module('modules.model')
     importlib.reload(model_module)
 
-    model = model_module.VAE(config, train_dataset.EncodedInfo).to(device)
-    #%%
-    optimizer = optim.Adam(model.parameters(), lr=config["lr"])
-    #%%
-    """number of model parameters"""
+    
+    model = model_module.CVAE(config, config['encoded_info'], config['num_classes']).to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=config['lr'])
+
     count_parameters = lambda model: sum(p.numel() for p in model.parameters() if p.requires_grad)
     model_params = count_parameters(model)
-    print(f"Number of Parameters: {model_params/1000000:.1f}M")
-    #%%
-    """train"""
+
+    # Training loop
     train_module = importlib.import_module('modules.train')
     importlib.reload(train_module)
+    # train_module.train_function(
+    #     model,
+    #     config,
+    #     optimizer,
+    #     train_dataloader,
+    #     device
+    # )
+
     train_module.train_function(
-        model, 
-        config, 
+        model,
+        config,
         optimizer,
-        train_dataloader, 
+        train_dataloader,
+        test_dataloader,
         device
     )
-    #%%
+
+   
     """model save"""
     base_name = f"{config['dataset']}_{config['latent_dim']}"
     model_dir = f"./assets/models/{base_name}"
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    model_name = f"VAE_{base_name}_{config['seed']}"
+    model_name = f"CVAE_{base_name}_{config['seed']}"
 
     torch.save(model.state_dict(), f"./{model_dir}/{model_name}.pth")
     artifact = wandb.Artifact(
