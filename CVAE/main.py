@@ -140,21 +140,28 @@ def main():
 
    
     """model save"""
-    base_name = f"{config['dataset']}_{config['latent_dim']}"
-    model_dir = f"./assets/models/{base_name}"
+    base_name = f"{config['dataset']}_{config['latent_dim']}" # MNIST_64
+    print(base_name)
+    model_dir = f"./assets/models/{base_name}" # ./assets/models/MNIST_64
+    print(model_dir)
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    model_name = f"CVAE_{base_name}_{config['seed']}"
-
-    torch.save(model.state_dict(), f"./{model_dir}/{model_name}.pth")
+    model_name = f"CVAE_{base_name}_{config['seed']}.pth" # CVAE_MNIST_64_0.pth
+    print(model_name)
+    save_path = os.path.join(model_dir, model_name) # assets/models/MNIST_64/CVAE_MNIST_64_0.pth
+    print(save_path)
+    torch.save(model.state_dict(), save_path)
+    
+    print("_".join(model_name.split("_")[:-1]))
     artifact = wandb.Artifact(
-        "_".join(model_name.split("_")[:-1]), 
+        "_".join(model_name.split("_")[:-1]), # CVAE_MNIST_64
         type='model',
         metadata=config) 
-    artifact.add_file(f"./{model_dir}/{model_name}.pth")
+    print(f"{model_dir}/{model_name}")
+    artifact.add_file(f"./{model_dir}/{model_name}") 
     artifact.add_file('./main.py')
     artifact.add_file('./modules/model.py')
-    artifact.add_file('./modules/train.py')
+    artifact.add_file('./modules/train.py') 
     wandb.log_artifact(artifact)
     #%%
     wandb.config.update(config, allow_val_change=True)

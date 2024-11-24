@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader
 
 #%% CVAE(fc layer로 구성)
 class CVAE(nn.Module):
@@ -77,3 +78,12 @@ class CVAE(nn.Module):
     #     with torch.no_grad():
     #         generated_images = self.decode(z, y)
     #     return generated_images
+    
+    def generate(self, loader, labels, device):
+        batch, _ = next(iter(loader))
+        
+        with torch.no_grad():
+            batch = batch.to(device)
+            labels = labels.to(device)
+            generated_images, _, _ = self(batch, labels)  # Pass both data and labels
+        return generated_images
