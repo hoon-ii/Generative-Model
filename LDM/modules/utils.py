@@ -1,32 +1,38 @@
 #%%
 import torch
-import random
 import numpy as np
+import random
+import matplotlib.pyplot as plt
 
-"""for reproducibility"""
-def set_random_seed(seed):
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)  # 모든 GPU에 대한 시드 고정
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-
-    # NumPy 시드 고정
+def set_seed(seed):
     np.random.seed(seed)
-    random.seed(seed) 
+    random.seed(seed)  
+    torch.manual_seed(seed)
+    
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)  
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark =  True
 
-def make_beta_schedule(schedule='linear',timesteps=1_000,beta_start=0.0001,beta_end=0.02):
-    if schedule == 'linear':
-        betas = torch.linspace(beta_start, beta_end, timesteps)
-    elif schedule == 'quad':
-        betas = torch.linspace(beta_start ** 0.5, beta_end ** 0.5, timesteps) ** 2
-    elif schedule == 'sigmoid':
-        x = torch.linspace(-6, 6, timesteps)
-        betas = torch.sigmoid(x) * (beta_end - beta_start) + beta_start
-    else:
-        raise NotImplementedError(f"unknown beta schedule: {schedule}")    
-    return betas  
+def plot_loss_history(train_loss_history, val_loss_history):
+    plt.figure(figsize=(10, 5))
+    plt.plot(train_loss_history, label='Train Loss')
+    plt.plot(val_loss_history, label='Validation Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.title('Loss History')
+    plt.show()
 
+def denormalize(image, mean, std):
+    mean = np.array(mean)
+    std = np.array(std)
+    image = image * std + mean
+    return np.clip(image, 0, 1)   
+
+def l1_loss(self, output, target):
+    return torch.mean(torch.abs(output - target))
 
 def normal_kl(mean1, logvar1, mean2, logvar2):
     """
@@ -44,3 +50,11 @@ def normal_kl(mean1, logvar1, mean2, logvar2):
                     + (mean1 - mean2).pow(2) * torch.exp(-logvar2))
     
     return kl_div.mean()
+    
+# reverse_transform = Compose([
+#      Lambda(lambda t: (t + 1) / 2),
+#      Lambda(lambda t: t.permute(1, 2, 0)), # CHW to HWC
+#      Lambda(lambda t: t * 255.),
+#      Lambda(lambda t: t.numpy().astype(np.uint8)),
+#      ToPILImage(),
+# ])
