@@ -1,14 +1,9 @@
-#%%
 #%% Import necessary libraries
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.utils
 import numpy as np
-import matplotlib.pyplot as plt
 import wandb
-import os
-
 from tqdm import tqdm
 from torch.optim.lr_scheduler import StepLR 
 

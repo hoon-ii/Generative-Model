@@ -38,6 +38,7 @@ def arg_as_list(s):
     return v
 
 def get_args(debug=False):
+    #%% VQVAE
     parser = argparse.ArgumentParser(description="VQVAE and UNet configurations")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--img_size", type=int, default=64)
@@ -59,26 +60,18 @@ def get_args(debug=False):
     parser.add_argument("--num_heads", type=int, default=8)
     parser.add_argument("--num_groups", type=int, default=2)
     parser.add_argument("--cur_res", type=int, default=32)
-
     parser.add_argument("--out_ch", type=int, default=3)
-    
     parser.add_argument("--num_res_blocks", type=int, default=2)
     parser.add_argument("--attn_resolutions", nargs='+', type=int, default=[128, 64])
     parser.add_argument("--dropout", type=float, default=0.0)
-
     parser.add_argument("--dataset", type=str, default="cifar10")
     parser.add_argument("--batch_size", type=int, default=1)
-
     parser.add_argument("--epochs", type=int, default=1)
     parser.add_argument("--learning_rate", type=float, default=0.000048)
     parser.add_argument("--learning_rate2", type=float, default=0.000002)
     parser.add_argument("--loss", type=str, default="l2")
-
     parser.add_argument("--base_channels", type=int, default=32)
-    
     parser.add_argument("--context_dim", type=int, default=512)
-    
-
     parser.add_argument("--timesteps", type=int, default=1000)
     parser.add_argument("--beta_start", type=float, default=0.0001)
     parser.add_argument("--beta_end", type=float, default=0.02)
@@ -87,7 +80,6 @@ def get_args(debug=False):
     parser.add_argument("--resamp_with_conv", type=bool , default=True)
     parser.add_argument("--attn_type", type=str , default='vanilla')
     parser.add_argument("--in_channels", type=int, default=3)
-
     parser.add_argument("--scheduler", type=str, default="linear")
     if debug:
         return parser.parse_args(argsa=[])
