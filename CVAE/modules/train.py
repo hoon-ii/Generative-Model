@@ -64,21 +64,46 @@ def train_function(
         print_input += ''.join([', {}: {:.4f}'.format(x, np.mean(y)) for x, y in logs.items()])
         print(print_input)
         
-        if (epoch + 1) % 5 == 0:
-            model.eval()
-            with torch.no_grad():
-                for batch_te, labels_te in test_dataloader:
-                    batch_te, labels_te = batch_te.to(device), labels_te.to(device)
-                    generated_images, _, _ = model(batch_te, labels_te)
-                grid = make_grid(generated_images.cpu(), nrow=10, normalize=True)
+    #     if epoch == config['epochs']:
+    #         model.eval()
+    #         with torch.no_grad():
+    #             for batch_te, labels_te in test_dataloader:
+    #                 batch_te, labels_te = batch_te.to(device), labels_te.to(device)
+    #                 generated_images, _, _ = model(batch_te, labels_te)
+    #             grid = make_grid(generated_images.cpu(), nrow=10, normalize=True)
 
-                # 이미지 저장 경로
-                save_path = os.path.join(save_dir, f'CVAE_epoch_{epoch + 1:03d}.png')
-                save_image(grid, save_path)
-                print(f"Generated images saved at: {save_path}")
+    #             # 이미지 저장 경로
+    #             save_path = os.path.join(save_dir, f'CVAE_epoch_{epoch + 1:03d}.png')
+    #             save_image(grid, save_path)
+    #             print(f"Generated images saved at: {save_path}")
 
-        """update log"""
-        wandb.log({x : np.mean(y) for x, y in logs.items()})
+    #     """update log"""
+    #     wandb.log({x : np.mean(y) for x, y in logs.items()})
 
-    return
+    # return
+    num_samples = 1000
+    model.eval()
+    os.makedirs(save_dir, exist_ok=True)  # Ensure the save directory exists
+    with torch.no_grad():
+        total_saved = 0  # Number of images saved
+        for batch_te, labels_te in test_dataloader:
+            # Move data to the device
+            batch_te, labels_te = batch_te.to(device), labels_te.to(device)
+            # Generate images
+            generated_images, _, _ = model(batch_te, labels_te)
+            # Save each image individually
+            for _, img in enumerate(generated_images):
+                if total_saved >= num_samples:
+                    break
+                # Save individual image
+                save_path = os.path.join(
+                    save_dir, f'CVAE_epoch_{epoch + 1:03d}_sample_{total_saved + 1:04d}.png'
+                )
+                save_image(img.cpu(), save_path, normalize=True)
+                print(f"Saved image {total_saved + 1}/num_samples at: {save_path}")
+                total_saved += 1
+            if total_saved >= num_samples:
+                break
+    """update log"""
+    wandb.log({x: np.mean(y) for x, y in logs.items()})
 # %%

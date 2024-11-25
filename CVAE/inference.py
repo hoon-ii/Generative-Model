@@ -3,12 +3,10 @@ import os
 import torch
 import argparse
 import importlib
-from torchvision.utils import save_image
 import torch
 import matplotlib.pyplot as plt
 from modules.utils import set_random_seed
-from evaluate.evaluate import convert2png, evalutae
-
+from evaluate.evaluate import convert2png, fid_eval
 #%%
 import sys
 import subprocess
@@ -58,7 +56,9 @@ def get_args(debug=False):
 
     parser.add_argument("--FID_size",type=int, default=1024)
     parser.add_argument("--dims", type=int, default=2048)
-
+    parser.add_argument('--num_classes', type = int, default = 10, help = 'number of classes')
+    parser.add_argument('--encoded_info', default = {'channels':1, 'height':28, 'width':28},
+                        help = 'channels, height, width')
 
     if debug:
         return parser.parse_args(args=[])
@@ -97,7 +97,7 @@ def main():
     """model"""
     model_module = importlib.import_module('modules.model')
     importlib.reload(model_module)
-    model = model_module.CVAE(config, train_dataset.EncodedInfo).to(device)
+    model = model_module.CVAE(config, config['encoded_info'], config['num_classes']).to(device)
     
     if config["device"]:
         model.load_state_dict(
@@ -123,24 +123,20 @@ def main():
     """generation"""
     # ax = model.generate(test_dataset)
     #%%
-    """ Image Generation """
+    """ Evaluate Score """
     #%%
-    num_samples = config['num_samples']
-    generated_images = model.generate(test_dataset, num_samples, device)
-
-    output_dir = f"./generated_samples/{model_name}"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    for idx, img in enumerate(generated_images):
-        file_name = f"{config['dataset']}_{idx+1:04d}.png"
-        save_image(img, os.path.join(output_dir, file_name), normalize=True)
-    wandb.log({"generated_images dir": output_dir})
+    img_dir = './img_CVAE'
+    wandb.log({"generated_images dir": img_dir})
 
     origin_png_dir = f"./{config['dataset']}_png_dir"
     convert2png(test_dataset, origin_png_dir)
-    fid_score = evalutae(config, origin_png_dir, output_dir)
-    print("fid_score >>> ",fid_score)
-    wandb.log({"FID": fid_score})
+    fid_value = fid_eval(config, origin_png_dir, img_dir)
+    print("fid_score >>> ",fid_value)
+    wandb.log({"FID": fid_value})
+    
+    # is_value = inception_score(config, img_dir)
+    # print("inception-socre ")
+    
 #%% 
 if __name__ == "__main__":
     main()  
